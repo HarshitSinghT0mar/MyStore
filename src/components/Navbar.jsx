@@ -1,4 +1,5 @@
 import React from 'react'
+import Cart from './Cart'
 
 const Navbar = () => {
   return (
@@ -11,7 +12,7 @@ const Navbar = () => {
           <a className="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/">Link</a>
+          <a className="nav-link" href="./Cart.jsx">Cart</a>
         </li>
     
       </ul>

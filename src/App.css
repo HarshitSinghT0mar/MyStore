@@ -1,6 +1,7 @@
 *{
   margin: 0;
-  padding: 0
+  padding: 0;
+  position: relative;
 }
 
 footer {
@@ -22,4 +23,12 @@ footer p {
   min-width: 20%;
   height: 30%;
   border: 1px solid black;
+}
+
+.card-body{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+ object-fit: contain;
+  height: auto
 }
