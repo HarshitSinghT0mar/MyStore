@@ -1,18 +1,20 @@
 import React from 'react'
 import Cart from './Cart'
+import { Link, Outlet } from 'react-router-dom'
 
 const Navbar = () => {
   return (
+    <>
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
     
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/">Home</a>
+          <Link className="nav-link active" aria-current="page" to="/">Home</Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="./Cart.jsx">Cart</a>
+          <Link to="./Cart" className="nav-link" >Cart</Link>
         </li>
     
       </ul>
@@ -23,6 +25,8 @@ const Navbar = () => {
     </div>
   </div>
 </nav>
+<Outlet />
+</>
   )
 }
 
