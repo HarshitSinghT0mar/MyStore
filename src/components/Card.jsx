@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const Card = (props) => {
  
@@ -9,8 +10,8 @@ const Card = (props) => {
   }
   return (
     
-    <div className="card w-25 text-center" style={{}}>
-  <img className="card-img-top h-25" src={props.image} alt="Card image cap" style={{objectFit:"contain"}}/>
+    <div className="card w-25 text-center">
+  <img className="card-img-top h-25" src={props.image} alt="Product Image" style={{objectFit:"contain"}}/>
   <div className="card-body" >
     <h5 className="card-title"style={{height:"auto"}}>{props.title}</h5>
     {/* <p className="card-text" style={{}}>{props.desc}</p> */}
@@ -22,8 +23,10 @@ const Card = (props) => {
   <div className="card-body p-0">
     {/* <a href="/" className="card-link">Card link</a> */}
     
-    <button onClick={handleClick} type="button" className="btn btn-success">add to cart</button>
-  </div>
+    <button onClick={handleClick} type="button" className="btn btn-success m-1">add to cart</button>
+    <Link to="/Cart"  className="btn btn-primary">go to cart</Link>
+    </div>
+  
    
 </div>
 

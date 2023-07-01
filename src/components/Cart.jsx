@@ -1,18 +1,30 @@
-import React from 'react'
-import Card from './Card'
+import { React, useContext, useEffect } from "react";
+import CartCard from "./CartCard";
+import { CartContext } from "../contexts/cartContext";
 
 const Cart = () => {
-  return (
-    <div>
-      {Cart.map((item,index)=>{<Card key={item.id}
-              id={item.id}
-              title={item.title}
-              desc={item.description}
-              price={item.price}
-              rating={item.rating.rate}
-              image={item.image}/>})}
-    </div>
-  )
-}
+  const { cart } = useContext(CartContext);
 
-export default Cart
+  const newCart = cart.map((item) => {
+    return item[0];
+  });
+
+  return (
+    <>
+      {newCart.map((item) => {
+        return (
+          <CartCard
+            key={item.id}
+            title={item.title}
+            desc={item.description}
+            price={item.price}
+            // rating={item.rating.rate}
+            image={item.image}
+          />
+        );
+      })}
+    </>
+  );
+};
+
+export default Cart;
