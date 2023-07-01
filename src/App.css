@@ -19,3 +19,8 @@ footer p {
   color: #aaa1a1;
 }
 
+.cart{
+  display: flex;
+  justify-content: space-around;
+ 
+}

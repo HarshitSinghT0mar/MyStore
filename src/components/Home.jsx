@@ -27,7 +27,7 @@ const Home = () => {
       {productList.map((item, index) => {
         return (
           <Card
-            onAdd={()=>{addCart(item.id)}}
+            onclick={()=>{addCart(item.id)}}
             key={item.id}
             id={item.id}
             title={item.title}
@@ -35,6 +35,9 @@ const Home = () => {
             price={item.price}
             rating={item.rating.rate}
             image={item.image}
+            text="add to cart"
+        btnText="go to cart"
+        bool={false}
           />
         );
       })}

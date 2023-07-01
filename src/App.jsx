@@ -4,13 +4,13 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import { useState } from "react";
 import Cart from "./components/Cart";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, BrowserRouter, Routes, useLocation } from "react-router-dom";
 import { CartContext } from "./contexts/cartContext";
 
 function App() {
   const [cart, setCart] = useState([]);
   const [productList, setProductList] = useState([]);
-console.log(cart)
+  const location = useLocation();
   const fakestore = () => {
     try {
       fetch("https://fakestoreapi.com/products")
@@ -23,17 +23,23 @@ console.log(cart)
   return (
     <>
       <CartContext.Provider
-        value={{ cart, setCart, productList, setProductList, fakestore }}
+        value={{
+          cart,
+          setCart,
+          productList,
+          setProductList,
+          fakestore,
+          location,
+        }}
       >
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Navbar />}>
-              <Route index element={<Home />} />
-              <Route path="Cart" element={<Cart />} />
-              <Route path="Home" element={<Home />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navbar />}>
+            <Route index element={<Home />} />
+            <Route path="Cart" element={<Cart />} />
+            <Route path="Home" element={<Home />} />
+          </Route>
+        </Routes>
+
         <Footer />
       </CartContext.Provider>
     </>
