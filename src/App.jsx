@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import { useState } from "react";
 import Cart from "./components/Cart";
-import { Route, BrowserRouter, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { CartContext } from "./contexts/cartContext";
 
 function App() {
@@ -32,12 +32,11 @@ function App() {
           location,
         }}
       >
+        <Navbar />
         <Routes>
-          <Route path="/" element={<Navbar />}>
-            <Route index element={<Home />} />
-            <Route path="Cart" element={<Cart />} />
-            <Route path="Home" element={<Home />} />
-          </Route>
+          <Route index element={<Home />} />
+          <Route path="Cart" element={<Cart />} />
+          <Route path="Home" element={<Home />} />
         </Routes>
 
         <Footer />

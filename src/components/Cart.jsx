@@ -1,34 +1,26 @@
 import { React, useContext, useEffect } from "react";
 import Card from "./Card";
 import { CartContext } from "../contexts/cartContext";
-
+import { v4 as uuidv4 } from "uuid";
 const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
-  
-
-  const newCart = cart.map((item) => {
-    return item[0];
-  });
   const onRemove = (id) => {
-    setCart((prevItem) => {
-      return [
-        newCart.filter((item) => {
-          return item.id !== id;
-        }),
-      ];
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter((item) => item.id !== id);
+      return updatedCart;
     });
-    return;
   };
+   
 
   return (
-   <>
-      {newCart.map((item) => {
+    <>
+    {cart.length > 0 ? (
+      cart.map((item) => {
         return (
-          <div className="cart">
+          <div className="cart" key={uuidv4()}>
             <Card
-              key={item.id}
-              id={item.id}
               title={item.title}
+              id={item.id}
               desc={item.description}
               price={item.price}
               rating={item.rating.rate}
@@ -42,8 +34,13 @@ const Cart = () => {
             />
           </div>
         );
-      })}
-      </>
+      })
+    ) : (
+      <p className="text-center">Your cart is empty.</p>
+    )}
+  </>
+  
+
   );
 };
 

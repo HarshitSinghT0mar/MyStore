@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import Card from "./Card";
 import {CartContext} from "../contexts/cartContext";
 
+
 const Home = () => {
  
-  const {setCart,productList,fakestore } = useContext(CartContext);
+  const {cart,setCart,productList,fakestore } = useContext(CartContext);
 
   useEffect(() => {
     fakestore();
@@ -12,10 +13,10 @@ const Home = () => {
 
 
   const addCart = (id) => {
-    setCart((prevItem) => {
+   setCart((prevItem) => {
       return [
         ...prevItem,
-        productList.filter((item) => {
+        productList.find((item) => {
           return item.id === id;
         }),
       ];

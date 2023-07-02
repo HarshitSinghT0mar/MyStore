@@ -7,7 +7,7 @@ import { CartContext } from '../contexts/cartContext';
 
 
 const Card = (props) => {
- const {location}=useContext(CartContext)
+ 
 
   return (
     
@@ -23,11 +23,11 @@ const Card = (props) => {
   </ul>
   <div className="card-body">
     {/* <a href="/" className="card-link">Card link</a> */}
-    <Button btnFunction={props.onclick} btn={props.text} key={uuidv4()} />
+    <Button btnFunction={props.onclick} btn={props.text} />
 
     
     {/* <button onClick={props.onAdd} type="button" className="btn btn-success m-1">add to cart</button> */}
-    <Link to={props.bool?"/Home":"/Cart"} className="btn btn-primary" key={uuidv4()}>{props.btnText}</Link>
+    <Link to={props.bool?"/Home":"/Cart"} className="btn btn-primary"  >{props.btnText}</Link>
     </div>
   
    
