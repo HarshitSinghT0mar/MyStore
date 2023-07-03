@@ -13,18 +13,24 @@ const Home = () => {
 
 
   const addCart = (id) => {
-   setCart((prevItem) => {
-      return [
-        ...prevItem,
-        productList.find((item) => {
-          return item.id === id;
-        }),
-      ];
+    const itemExists = cart.some((item) => item.id === id);
+    if (itemExists) {
+      return; // Item already exists in the cart, no need to add it again
+    }
+  
+    setCart((prevItems) => {
+      const newItem = productList.find((item) => item.id === id);
+      console.log(newItem)
+      if (newItem) {
+        return [...prevItems, newItem];
+      }
+      return prevItems;
     });
   };
+  
 
   return (
-    <div className="d-flex  flex-wrap justify-content-center h-50">
+    <div className="d-flex  flex-wrap justify-content-center h-50 " style={{marginTop: "80px"}}>
       {productList.map((item, index) => {
         return (
           <Card
