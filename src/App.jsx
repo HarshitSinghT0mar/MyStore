@@ -11,7 +11,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [productList, setProductList] = useState([]);
   const location = useLocation();
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("all");
   const [allProducts, setAllProducts] = useState([]);
   const fetchData = async () => {
     try {

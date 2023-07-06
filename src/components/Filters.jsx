@@ -2,35 +2,27 @@ import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../contexts/cartContext";
 
 const Filters = () => {
-  const {
-    productList,
-
-    setProductList,
-    fetchData,
-    category,
-    setCategory,
-    allProducts
-  } = useContext(CartContext);
-
-  
+  const { setProductList, fetchData, category, setCategory, allProducts } =
+    useContext(CartContext);
 
   useEffect(() => {
-   fetchData();
+    fetchData();
   }, []);
 
   const selectCategory = (e) => {
     const selectedOption = e.target.value;
-    console.log(selectedOption);
+
     return setCategory(selectedOption);
   };
 
   const applyFilters = () => {
+   
     return setProductList((prevItem) => {
       const singleProducts = allProducts.filter((item) => {
         return item.category === category;
       });
-      // console.log(singleProducts,category)
-      return singleProducts;
+   
+      return category==="all"?allProducts:singleProducts;
     });
   };
   // console.log(productList)
@@ -41,7 +33,12 @@ const Filters = () => {
       <div className="filter-options">
         <div className="filter-category">
           <label htmlFor="category">Category:</label>
-          <select id="category" name="category" onChange={selectCategory}>
+          <select
+            id="category"
+            name="category"
+            onChange={selectCategory}
+            value={category}
+          >
             <option value="all">All</option>
             <option value="electronics">Electronics</option>
             <option value="men's clothing">Men's clothing</option>
