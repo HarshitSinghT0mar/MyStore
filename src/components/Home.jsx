@@ -1,53 +1,45 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect} from "react";
 import Card from "./Card";
 import {CartContext} from "../contexts/cartContext";
+import Filters from "./Filters";
+
 
 
 const Home = () => {
  
-  const {cart,setCart,productList,fakestore } = useContext(CartContext);
+  const {addCart,productList,fetchData } = useContext(CartContext);
 
   useEffect(() => {
-    fakestore();
+    fetchData();
   }, []);
 
 
-  const addCart = (id) => {
-    const itemExists = cart.some((item) => item.id === id);
-    if (itemExists) {
-      return; // Item already exists in the cart, no need to add it again
-    }
-  
-    setCart((prevItems) => {
-      const newItem = productList.find((item) => item.id === id);
-      console.log(newItem)
-      if (newItem) {
-        return [...prevItems, newItem];
-      }
-      return prevItems;
-    });
-  };
-  
-
   return (
-    <div className="d-flex  flex-wrap justify-content-center h-50 " style={{marginTop: "80px"}}>
+    <div style={{display:"flex",marginTop: "80px" ,height:"100%",boxSizing:"border-box"}}>
+    <div className="filter" style={{flex:"0.2 0" ,border:"1px solid grey",width:"15%",boxSizing:"border-box",alignSelf:"stretch"}}>
+      <Filters />
+    </div>
+    <div className="d-flex" style={{flex:"1 0",flexWrap:"wrap",boxSizing:"border-box"}}>
       {productList.map((item, index) => {
+        const {id,title,description,rating,price,category,image}=item
         return (
           <Card
             onclick={()=>{addCart(item.id)}}
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            desc={item.description}
-            price={item.price}
-            rating={item.rating.rate}
-            image={item.image}
+            key={id}
+            id={id}
+            title={title}
+            desc={description}
+            price={price}
+            rating={rating.rate}
+            image={image}
             text="add to cart"
         btnText="go to cart"
         bool={false}
+        category={category}
           />
         );
       })}
+    </div>
     </div>
   );
 };

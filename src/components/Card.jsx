@@ -1,8 +1,7 @@
 import Button from './Button';
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
-import {v4 as uuidv4} from "uuid"
-import { CartContext } from '../contexts/cartContext';
+
 
 
 
@@ -15,7 +14,7 @@ const Card = (props) => {
   <img className="card-img-top h-25" src={props.image} alt="Product Image" style={{objectFit:"contain"}}/>
   <div className="card-body" >
     <h5 className="card-title"style={{height:"auto"}}>{props.title}</h5>
-  {props.bool && <p className="card-text">{props.desc}</p>}
+  {props.bool ? (<p className="card-text">{props.desc}</p>) : (<p className='card-text'>{props.category}</p>)}
   </div>
   <ul className="list-group list-group-flush">
     <li className="list-group-item">price: {props.price}</li>

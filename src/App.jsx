@@ -11,14 +11,33 @@ function App() {
   const [cart, setCart] = useState([]);
   const [productList, setProductList] = useState([]);
   const location = useLocation();
-  const fakestore = () => {
+  const [category, setCategory] = useState("");
+  const [allProducts, setAllProducts] = useState([]);
+  const fetchData = async () => {
     try {
-      fetch("https://fakestoreapi.com/products")
-        .then((res) => res.json())
-        .then((res) => setProductList(res));
+      const response = await fetch("https://fakestoreapi.com/products");
+      const data = await response.json();
+      setProductList(data);
+      setAllProducts(data);
     } catch (error) {
-      console.log(err);
+      console.log("Error fetching data:", error);
     }
+  };
+  
+  const addCart = (id) => {
+    const itemExists = cart.some((item) => item.id === id);
+    if (itemExists) {
+      return; // Item already exists in the cart, no need to add it again
+    }
+
+    setCart((prevItems) => {
+      const newItem = productList.find((item) => item.id === id);
+
+      if (newItem) {
+        return [...prevItems, newItem];
+      }
+      return prevItems;
+    });
   };
   return (
     <>
@@ -28,8 +47,13 @@ function App() {
           setCart,
           productList,
           setProductList,
-          fakestore,
+          fetchData,
           location,
+          addCart,
+          category,
+          setCategory,
+          allProducts,
+          setAllProducts,
         }}
       >
         <Navbar />

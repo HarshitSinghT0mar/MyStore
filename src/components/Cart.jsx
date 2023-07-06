@@ -17,7 +17,7 @@ const Cart = () => {
     {cart.length > 0 ? (
       cart.map((item) => {
         return (
-          <div className="cart d-flex justify-content-center" key={uuidv4()}>
+          <div className="cart d-flex justify-content-center" key={uuidv4()} style={{marginTop:"80px"}}>
             <Card
               title={item.title}
               id={item.id}
