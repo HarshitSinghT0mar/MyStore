@@ -1,38 +1,31 @@
 import Button from './Button';
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-
-
-
 const Card = (props) => {
- 
-
   return (
-    
-    <div className="card w-25 text-center">
-  <img className="card-img-top h-25" src={props.image} alt="Product Image" style={{objectFit:"contain"}}/>
-  <div className="card-body" >
-    <h5 className="card-title"style={{height:"auto"}}>{props.title}</h5>
-  {props.bool ? (<p className="card-text">{props.desc}</p>) : (<p className='card-text'>{props.category}</p>)}
-  </div>
-  <ul className="list-group list-group-flush">
-    <li className="list-group-item">price: {props.price}</li>
-    <li className="list-group-item">rating: {props.rating}</li>
-  </ul>
-  <div className="card-body">
-    {/* <a href="/" className="card-link">Card link</a> */}
-    <Button btnFunction={props.onclick} btn={props.text} />
-
-    
-    {/* <button onClick={props.onAdd} type="button" className="btn btn-success m-1">add to cart</button> */}
-    <Link to={props.bool?"/Home":"/Cart"} className="btn btn-primary"  >{props.btnText}</Link>
+    <div className="card">
+      <img className="card-image" src={props.image} alt="Product Image" />
+      <div className="card-body">
+        <h5 className="card-title">{props.title}</h5>
+        {props.bool ? (
+          <p className="card-description">{props.desc}</p>
+        ) : (
+          <p className="card-category">{props.category}</p>
+        )}
+      </div>
+      <ul className="list-group list-group-flush">
+        <li className="list-group-item">Price: {props.price}</li>
+        <li className="list-group-item">Rating: {props.rating}</li>
+      </ul>
+      <div className="card-footer">
+        <Button btnFunction={props.onclick} btn={props.text} />
+        {/* <Link to={props.bool ? "/Home" : "/Cart"} className="card-button">
+          {props.btnText}
+        </Link> */}
+      </div>
     </div>
-  
-   
-</div>
+  );
+};
 
-  )
-}
-
-export default Card
+export default Card;

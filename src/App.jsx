@@ -40,6 +40,30 @@ function App() {
       return prevItems;
     });
   };
+  const applyFilters = () => {
+    const isInCategory = allProducts.filter((item) => {
+      return item.category === category;
+    });
+    const isInPriceRange = allProducts.filter((item) => {
+      return item.price >= priceRange[0] && item.price <= priceRange[1];
+    });
+    const commonProducts = isInCategory.filter((item) => {
+      return isInPriceRange.includes(item);
+    });
+    const singleProducts =
+      isInCategory.length && isInPriceRange.length
+        ? commonProducts
+        : isInCategory.length
+        ? isInCategory
+        : isInPriceRange;
+
+    return setProductList(() => {
+      return category === "all" && priceRange[0] === "all"
+        ? allProducts
+        : singleProducts;
+    });
+  };
+  
   return (
     <>
       <CartContext.Provider
@@ -54,7 +78,7 @@ function App() {
           category,
           setCategory,
           allProducts,
-          setAllProducts,priceRange,setPriceRange
+          setAllProducts,priceRange,setPriceRange,applyFilters
         }}
       >
         <Navbar />
