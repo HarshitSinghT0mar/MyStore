@@ -1,6 +1,6 @@
 import Button from './Button';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const Card = (props) => {
   return (
@@ -19,7 +19,7 @@ const Card = (props) => {
         <li className="list-group-item">Rating: {props.rating}</li>
       </ul>
       <div className="card-footer">
-        <Button btnFunction={props.onclick} btn={props.text} />
+       <Button btnFunction={props.onclick} btn={props.text} />
         {/* <Link to={props.bool ? "/Home" : "/Cart"} className="card-button">
           {props.btnText}
         </Link> */}

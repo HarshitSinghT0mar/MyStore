@@ -14,6 +14,7 @@ function App() {
   const [category, setCategory] = useState("all");
   const [allProducts, setAllProducts] = useState([]);
   const[priceRange,setPriceRange]=useState(['all'])
+  const [counter,setCounter]= useState()
   const fetchData = async () => {
     try {
       const response = await fetch("https://fakestoreapi.com/products");
@@ -78,7 +79,7 @@ function App() {
           category,
           setCategory,
           allProducts,
-          setAllProducts,priceRange,setPriceRange,applyFilters
+          setAllProducts,priceRange,setPriceRange,applyFilters,counter,setCounter
         }}
       >
         <Navbar />

@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { CartContext } from "../contexts/cartContext";
 
 const Navbar = () => {
+  const {counter,setCounter,cart}=useContext(CartContext)
+
+    setCounter(cart.length)
+  
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-primary fixed-top">
+      <nav
+        className="navbar navbar-expand fixed-top"
+        style={{ background: "#337ab7" }}
+      >
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
             MyStore
@@ -21,7 +30,7 @@ const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav me-auto mb-0 mb-lg-0">
               <li className="nav-item">
                 <Link
                   className="nav-link active text-white"
@@ -31,13 +40,12 @@ const Navbar = () => {
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/Cart" className="nav-link text-white">
-                  Cart
-                </Link>
-              </li>
             </ul>
-            <form className="d-flex" role="search">
+            <Link to="/Cart" className="nav-link text-white mx-3" >
+              <ShoppingCartIcon sx={{fontSize: 35}}/>
+              <span className="badge bg-danger">{counter}</span>
+            </Link>
+            {/* <form className="d-flex" role="search">
               <input
                 className="form-control me-2"
                 type="search"
@@ -47,7 +55,7 @@ const Navbar = () => {
               <button className="btn btn-outline-light" type="submit">
                 Search
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       </nav>
