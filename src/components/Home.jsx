@@ -8,8 +8,10 @@ const Home = () => {
     addCart,
     productList,
     fetchData,
+    setCart
   } = useContext(CartContext);
 
+ 
   useEffect(() => {
     fetchData();
   }, []);

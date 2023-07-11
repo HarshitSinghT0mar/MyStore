@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import { useState } from "react";
 import Cart from "./components/Cart";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, json, useLocation } from "react-router-dom";
 import { CartContext } from "./contexts/cartContext";
 
 function App() {
@@ -15,6 +15,8 @@ function App() {
   const [allProducts, setAllProducts] = useState([]);
   const[priceRange,setPriceRange]=useState(['all'])
   const [counter,setCounter]= useState()
+
+  
   const fetchData = async () => {
     try {
       const response = await fetch("https://fakestoreapi.com/products");
@@ -29,7 +31,7 @@ function App() {
   const addCart = (id) => {
     const itemExists = cart.some((item) => item.id === id);
     if (itemExists) {
-      return; // Item already exists in the cart, no need to add it again
+      return; 
     }
 
     setCart((prevItems) => {
@@ -38,8 +40,11 @@ function App() {
       if (newItem) {
         return [...prevItems, newItem];
       }
+      
       return prevItems;
     });
+    localStorage.setItem("CartStorage",JSON.stringify(cart))
+
   };
   const applyFilters = () => {
     const isInCategory = allProducts.filter((item) => {
@@ -64,7 +69,11 @@ function App() {
         : singleProducts;
     });
   };
-  
+  window.onload = () => {
+    const newCart = JSON.parse(localStorage.getItem("CartStorage"));
+    setCart(newCart);
+  };
+
   return (
     <>
       <CartContext.Provider

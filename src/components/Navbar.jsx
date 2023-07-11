@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { CartContext } from "../contexts/cartContext";
@@ -6,7 +6,9 @@ import { CartContext } from "../contexts/cartContext";
 const Navbar = () => {
   const {counter,setCounter,cart}=useContext(CartContext)
 
-    setCounter(cart.length)
+   useEffect(()=>{
+    return setCounter(cart.length)
+   },[cart])
   
   return (
     <>

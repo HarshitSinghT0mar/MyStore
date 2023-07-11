@@ -17,6 +17,8 @@ body {
   --primary-color-dark: #23527c;
   --secondary-color: #f53920f8;
   --secondary-color-dark: rgba(255, 0, 0, 0.938);
+  --optional-color: rgb(255, 127, 8);
+  --optional-color-dark: rgb(255, 94, 0);
 }
 
 .footer {
@@ -50,7 +52,7 @@ body {
   flex: 1 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: flex-start;
   box-sizing: border-box;
 }
@@ -166,7 +168,7 @@ select {
   align-items: center;
 }
 .card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 .card-category {
   font-size: 14px;
@@ -205,6 +207,7 @@ select {
   margin-top: 70px;
 max-width: 100%;
 flex-wrap: wrap;
+
 }
 
 
@@ -248,5 +251,25 @@ font-weight: bold;
 }
 
 .cart-item .card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
+.clear-cart-btn {
+  display: inline-block;
+  padding: 5px 20px;
+  background-color: var(--optional-color);
+  color: #ffffff;
+  border: none;
+  /* border-radius: 5px; */
+  font-size: 22px;
+margin: 10px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 14vw;
+
+}
+
+.clear-cart-btn:hover {
+  background-color: var(--optional-color-dark)}
