@@ -13,10 +13,9 @@ function App() {
   const location = useLocation();
   const [category, setCategory] = useState("all");
   const [allProducts, setAllProducts] = useState([]);
-  const[priceRange,setPriceRange]=useState(['all'])
-  const [counter,setCounter]= useState()
+  const [priceRange, setPriceRange] = useState(["all"]);
+  const [counter, setCounter] = useState();
 
-  
   const fetchData = async () => {
     try {
       const response = await fetch("https://fakestoreapi.com/products");
@@ -27,11 +26,11 @@ function App() {
       console.log("Error fetching data:", error);
     }
   };
-  
+
   const addCart = (id) => {
     const itemExists = cart.some((item) => item.id === id);
     if (itemExists) {
-      return; 
+      return;
     }
 
     setCart((prevItems) => {
@@ -40,11 +39,10 @@ function App() {
       if (newItem) {
         return [...prevItems, newItem];
       }
-      
+
       return prevItems;
     });
-    localStorage.setItem("CartStorage",JSON.stringify(cart))
-
+    localStorage.setItem("CartStorage", JSON.stringify(cart));
   };
   const applyFilters = () => {
     const isInCategory = allProducts.filter((item) => {
@@ -70,8 +68,11 @@ function App() {
     });
   };
   window.onload = () => {
-    const newCart = JSON.parse(localStorage.getItem("CartStorage"));
-    setCart(newCart);
+    const storedItems= JSON.parse(localStorage.getItem("CartStorage"))
+    
+    setCart((prevCart)=> storedItems?storedItems:prevCart)
+  
+    
   };
 
   return (
@@ -88,7 +89,12 @@ function App() {
           category,
           setCategory,
           allProducts,
-          setAllProducts,priceRange,setPriceRange,applyFilters,counter,setCounter
+          setAllProducts,
+          priceRange,
+          setPriceRange,
+          applyFilters,
+          counter,
+          setCounter,
         }}
       >
         <Navbar />

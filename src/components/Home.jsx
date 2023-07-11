@@ -11,7 +11,6 @@ const Home = () => {
     fetchData
    
   } = useContext(CartContext);
-
  
   useEffect(() => {
     fetchData();
