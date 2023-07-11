@@ -2,16 +2,17 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  width: 100%;
-}
-
-body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; 
-  position: relative;
- 
+  min-height: 100vh;
 }
+
+/* body {
+  display: flex;
+  flex-direction: column;
+  /* min-height: 100vh;  */
+  /* position: relative; 
+}  */
 :root {
   --primary-color: #337ab7;
   --primary-color-dark: #23527c;
@@ -21,21 +22,35 @@ body {
   --optional-color-dark: rgb(255, 94, 0);
 }
 
+.home-container {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  min-height: 90vh;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to the top */
+  align-items: center; /* Center content horizontally */
+  margin-top: 30px;
+  padding: 40px;
+}
 .footer {
   background-color: var(--primary-color);
   color: white;
   text-align: center;
   padding: 1rem;
-  
+  flex-shrink: 0.5;
   margin-bottom: 0;
   border-radius: 10px 10px 0 0;
-  bottom: 0;
+  /* bottom: 0;
   left: 0;
   right: 0;
-  position:sticky;
-  bottom: 0;
+  position:sticky; */
+min-height: 5vh;
   transition: bottom 0.3s ease;
   
+  
+ 
+ 
  
 }
 
@@ -57,7 +72,7 @@ body {
   box-sizing: border-box;
 }
 .filters-container {
-  flex: 0 0.5 15%;
+  flex: 1 0.5 15%;
  text-align: center;
   padding: 20px;
   box-sizing: border-box;
@@ -105,17 +120,6 @@ select {
 }
 
 
-.home-container {
-  flex: 1 0 auto;
-  padding: 20px;
-  display: flex;
- 
-  flex-direction: column;
-  justify-content: flex-start; /* Align content to the top */
-  align-items: center; /* Center content horizontally */
-  margin-top: 30px;
-  padding: 40px;
-}
 
 .filters-container {
   flex: 0 0 230px;
@@ -141,6 +145,7 @@ select {
   width: 100%;
   height: 200px; 
   object-fit: contain; 
+  
 }
 
 .card-body {
@@ -205,9 +210,9 @@ select {
   flex-direction: column;
   align-items: center;
   margin-top: 70px;
-max-width: 100%;
+max-width: 100vw;
 flex-wrap: wrap;
-
+min-height: 100vh;
 }
 
 

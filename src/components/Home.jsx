@@ -3,12 +3,13 @@ import Card from "./Card";
 import { CartContext } from "../contexts/cartContext";
 import Filters from "./Filters";
 
+
 const Home = () => {
   const {
     addCart,
     productList,
-    fetchData,
-    setCart
+    fetchData
+   
   } = useContext(CartContext);
 
  
@@ -45,6 +46,7 @@ const Home = () => {
           );
         })}
       </div>
+    
     </div>
   );
 };
