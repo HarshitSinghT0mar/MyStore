@@ -4,12 +4,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { CartContext } from "../contexts/cartContext";
 
 const Navbar = () => {
-  const {counter,setCounter,cart}=useContext(CartContext)
+  const { counter, setCounter, cart } = useContext(CartContext);
 
-   useEffect(()=>{
-    return setCounter(cart.length)
-   },[cart])
-  
+  useEffect(() => {
+    return setCounter(cart.length);
+  }, [cart]);
+
   return (
     <>
       <nav
@@ -43,9 +43,11 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
-            <Link to="/Cart" className="nav-link text-white mx-3" >
-              <ShoppingCartIcon sx={{fontSize: 35}}/>
-              <span className="badge bg-danger">{counter}</span>
+            <Link to="/Cart" className="nav-link text-white mx-3">
+              <ShoppingCartIcon sx={{ fontSize: 35 }} />
+              {cart.length > 0 && (
+                <span className="badge bg-danger">{counter}</span>
+              )}
             </Link>
             {/* <form className="d-flex" role="search">
               <input

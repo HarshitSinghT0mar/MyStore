@@ -2,10 +2,11 @@ import "./App.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cart from "./components/Cart";
-import { Route, Routes, json, useLocation } from "react-router-dom";
+import { Route, Routes,  useLocation } from "react-router-dom";
 import { CartContext } from "./contexts/cartContext";
+
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -15,6 +16,7 @@ function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [priceRange, setPriceRange] = useState(["all"]);
   const [counter, setCounter] = useState();
+  const[loading,setLoading]=useState(true)
 
   const fetchData = async () => {
     try {
@@ -24,8 +26,9 @@ function App() {
       setAllProducts(data);
     } catch (error) {
       console.log("Error fetching data:", error);
-    }
+    }finally{setLoading(false)}
   };
+
 
   const addCart = (id) => {
     const itemExists = cart.some((item) => item.id === id);
@@ -67,6 +70,7 @@ function App() {
         : singleProducts;
     });
   };
+
   window.onload = () => {
     const storedItems= JSON.parse(localStorage.getItem("CartStorage"))
     
@@ -94,7 +98,7 @@ function App() {
           setPriceRange,
           applyFilters,
           counter,
-          setCounter,
+          setCounter,loading
         }}
       >
         <Navbar />
