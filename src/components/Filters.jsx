@@ -3,20 +3,13 @@ import { CartContext } from "../contexts/cartContext";
 
 const Filters = () => {
   const {
-    setProductList,
-    fetchData,
     category,
     setCategory,
-    allProducts,
+
     priceRange,
     setPriceRange,
-    applyFilters
+    applyFilters,
   } = useContext(CartContext);
-
-  useEffect(() => {
-    fetchData();
-  
-  }, []);
 
   const selectCategory = (e) => {
     const selectedOption = e.target.value;
@@ -31,7 +24,6 @@ const Filters = () => {
     const priceArray = numberArray.map(Number); //converts each element of numberArray from string to number
     rangeStr === "all" ? setPriceRange([rangeStr]) : setPriceRange(priceArray); //for "all" pricearray would have been [NaN]
   };
- 
 
   return (
     <div className="filter-container">
