@@ -1,6 +1,6 @@
-import Button from './Button';
-import React from 'react';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Button from "./Button";
+import React from "react";
+import Rating from "@mui/material/Rating";
 
 const Card = (props) => {
   return (
@@ -16,10 +16,17 @@ const Card = (props) => {
       </div>
       <ul className="list-group list-group-flush">
         <li className="list-group-item">Price: {props.price}</li>
-        <li className="list-group-item">Rating: {props.rating}</li>
+        <li className="list-group-item">
+          <Rating
+            name="half-rating-read"
+            defaultValue={props.rating}
+            precision={0.1}
+            readOnly
+          />
+        </li>
       </ul>
       <div className="card-footer">
-       <Button btnFunction={props.onclick} btn={props.text} />
+        <Button btnFunction={props.onclick} btn={props.text} />
         {/* <Link to={props.bool ? "/Home" : "/Cart"} className="card-button">
           {props.btnText}
         </Link> */}
