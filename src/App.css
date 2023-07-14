@@ -222,6 +222,7 @@ select {
 }
 .cart-item img {
   min-width: 300px;
+  object-fit: contain;
 }
 
 .cart-item .card:hover {
