@@ -23,6 +23,7 @@ const Card = (props) => {
             precision={0.1}
             readOnly
           />
+          {props.bool && <p>{props.rating}</p>}
         </li>
       </ul>
       <div className="card-footer">

@@ -45,8 +45,9 @@ const Cart = () => {
           </div>
         ))
       ) : (
-        <div style={{ justifySelf: "flex-start", margin: "0 0 5vh 0" }}>
+        <div className="empty-cart-img">
           <img src="/emptyCart.png" alt="empty cart" />
+          <h5 style={{fontFamily:"cursive",marginLeft:"1rem"}}>cart empty</h5>
         </div>
       )}
       {cart.length > 0 && <button className="clear-cart-btn"onClick={clearCart}>clear cart</button>}

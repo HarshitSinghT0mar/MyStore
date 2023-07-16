@@ -1,15 +1,36 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { CartContext } from "../contexts/cartContext";
 
 const Filters = () => {
   const {
     category,
     setCategory,
-
-    priceRange,
     setPriceRange,
-    applyFilters,
+  applyFilters,
+    setProductList,
+    setSortOrder,
+    sortOrder,
+    productList,
   } = useContext(CartContext);
+
+
+
+  function sortArrayByKey(array, key) {
+    const comparator = (a, b) => {
+      const valueA = a[key];
+      const valueB = b[key];
+      if (sortOrder === "lowToHigh") {
+        return valueA - valueB;
+      } else if (sortOrder === "highToLow") {
+        return valueB - valueA;
+      }
+    };
+
+    const sortedArray = array.toSorted(comparator);
+    sortOrder === "none" ? setProductList(array) : setProductList(sortedArray);
+
+    return array;
+  }
 
   const selectCategory = (e) => {
     const selectedOption = e.target.value;
@@ -23,6 +44,10 @@ const Filters = () => {
     const numberArray = rangeStr.split(",");
     const priceArray = numberArray.map(Number); //converts each element of numberArray from string to number
     rangeStr === "all" ? setPriceRange([rangeStr]) : setPriceRange(priceArray); //for "all" pricearray would have been [NaN]
+  };
+
+  const sortProducts = (event) => {
+    return setSortOrder(event.target.value);
   };
 
   return (
@@ -46,18 +71,26 @@ const Filters = () => {
         </div>
         <div className="filter-price">
           <label htmlFor="price">Price:</label>
-          <select
-            id="price"
-            name="price"
-            onChange={priceFilter}
-            value={priceRange.join(",")}
-          >
+          <select id="price" name="price" onChange={priceFilter}>
             <option value="all">All</option>
             <option value={[0, 10]}>Under $10</option>
             <option value={[10, 50]}>$10 - $50</option>
             <option value={[50, 100]}>$50 - $100</option>
             <option value={[100, 500]}>$100-$500</option>
             <option value={[500, 1500]}>Over $500</option>
+          </select>
+        </div>
+        <div className="sort-products">
+          <label htmlFor="price">Sort by:</label>
+          <select
+            id="sort"
+            name="sort"
+            onChange={sortProducts}
+            value={sortOrder}
+          >
+            <option value="none">None</option>
+            <option value="lowToHigh">price: low to high</option>
+            <option value="highToLow">price: high to low</option>
           </select>
         </div>
       </div>

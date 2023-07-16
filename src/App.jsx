@@ -16,6 +16,7 @@ function App() {
   const [priceRange, setPriceRange] = useState(["all"]);
   const [counter, setCounter] = useState();
   const [loading, setLoading] = useState(true);
+  const [sortOrder, setSortOrder] = useState("none");
 
   const fetchData = async () => {
     try {
@@ -47,7 +48,18 @@ function App() {
     });
     localStorage.setItem("CartStorage", JSON.stringify(cart));
   };
-  const applyFilters = () => {
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  window.onload = () => {
+    const storedItems = JSON.parse(localStorage.getItem("CartStorage"));
+
+    setCart((prevCart) => (storedItems ? storedItems : prevCart));
+  };
+
+  const applyFilters = async () => {
     const isInCategory = allProducts.filter((item) => {
       return item.category === category;
     });
@@ -70,18 +82,6 @@ function App() {
         : singleProducts;
     });
   };
-  useEffect(() => {
-   
-    fetchData();
-
-  }, []);
-  
-
-  window.onload = () => {
-    const storedItems = JSON.parse(localStorage.getItem("CartStorage"));
-
-    setCart((prevCart) => (storedItems ? storedItems : prevCart));
-  };
 
   return (
     <>
@@ -100,10 +100,12 @@ function App() {
           setAllProducts,
           priceRange,
           setPriceRange,
-          applyFilters,
+
           counter,
           setCounter,
           loading,
+          sortOrder,
+          setSortOrder,applyFilters
         }}
       >
         <Navbar />
