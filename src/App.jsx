@@ -4,13 +4,12 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import { useEffect, useState } from "react";
 import Cart from "./components/Cart";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { CartContext } from "./contexts/cartContext";
 
 function App() {
   const [cart, setCart] = useState([]);
   const [productList, setProductList] = useState([]);
-  const location = useLocation();
   const [category, setCategory] = useState("all");
   const [allProducts, setAllProducts] = useState([]);
   const [priceRange, setPriceRange] = useState(["all"]);
@@ -43,19 +42,19 @@ function App() {
       if (newItem) {
         return [...prevItems, newItem];
       }
-
       return prevItems;
     });
-    localStorage.setItem("CartStorage", JSON.stringify(cart));
   };
 
   useEffect(() => {
     fetchData();
   }, []);
+  useEffect(() => {
+    cart.length && localStorage.setItem("CartStorage", JSON.stringify(cart));
+  }, [cart]);
 
   window.onload = () => {
     const storedItems = JSON.parse(localStorage.getItem("CartStorage"));
-
     setCart((prevCart) => (storedItems ? storedItems : prevCart));
   };
 
@@ -105,7 +104,8 @@ function App() {
           setCounter,
           loading,
           sortOrder,
-          setSortOrder,applyFilters
+          setSortOrder,
+          applyFilters,
         }}
       >
         <Navbar />
