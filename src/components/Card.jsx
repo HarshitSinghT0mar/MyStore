@@ -28,9 +28,6 @@ const Card = (props) => {
       </ul>
       <div className="card-footer">
         <Button btnFunction={props.onclick} btn={props.text} />
-        {/* <Link to={props.bool ? "/Home" : "/Cart"} className="card-button">
-          {props.btnText}
-        </Link> */}
       </div>
     </div>
   );

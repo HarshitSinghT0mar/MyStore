@@ -10,12 +10,17 @@ import { CartContext } from "./contexts/cartContext";
 function App() {
   const [cart, setCart] = useState([]);
   const [productList, setProductList] = useState([]);
-  const [category, setCategory] = useState("all");
   const [allProducts, setAllProducts] = useState([]);
-  const [priceRange, setPriceRange] = useState(["all"]);
-  const [counter, setCounter] = useState();
+
   const [loading, setLoading] = useState(true);
-  const [sortOrder, setSortOrder] = useState("none");
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    cart.length && localStorage.setItem("CartStorage", JSON.stringify(cart));
+  }, [cart]);
 
   const fetchData = async () => {
     try {
@@ -30,56 +35,9 @@ function App() {
     }
   };
 
-  const addCart = (id) => {
-    const itemExists = cart.some((item) => item.id === id);
-    if (itemExists) {
-      return;
-    }
-
-    setCart((prevItems) => {
-      const newItem = productList.find((item) => item.id === id);
-
-      if (newItem) {
-        return [...prevItems, newItem];
-      }
-      return prevItems;
-    });
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-  useEffect(() => {
-    cart.length && localStorage.setItem("CartStorage", JSON.stringify(cart));
-  }, [cart]);
-
   window.onload = () => {
     const storedItems = JSON.parse(localStorage.getItem("CartStorage"));
-    setCart((prevCart) => (storedItems ? storedItems : prevCart));
-  };
-
-  const applyFilters = async () => {
-    const isInCategory = allProducts.filter((item) => {
-      return item.category === category;
-    });
-    const isInPriceRange = allProducts.filter((item) => {
-      return item.price >= priceRange[0] && item.price <= priceRange[1];
-    });
-    const commonProducts = isInCategory.filter((item) => {
-      return isInPriceRange.includes(item);
-    });
-    const singleProducts =
-      isInCategory.length && isInPriceRange.length
-        ? commonProducts
-        : isInCategory.length
-        ? isInCategory
-        : isInPriceRange;
-
-    return setProductList(() => {
-      return category === "all" && priceRange[0] === "all"
-        ? allProducts
-        : singleProducts;
-    });
+    storedItems && setCart(storedItems);
   };
 
   return (
@@ -92,20 +50,9 @@ function App() {
           setProductList,
           fetchData,
           location,
-          addCart,
-          category,
-          setCategory,
-          allProducts,
-          setAllProducts,
-          priceRange,
-          setPriceRange,
-
-          counter,
-          setCounter,
           loading,
-          sortOrder,
-          setSortOrder,
-          applyFilters,
+          setAllProducts,
+          allProducts,
         }}
       >
         <Navbar />

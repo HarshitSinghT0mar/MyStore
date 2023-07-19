@@ -1,36 +1,53 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { CartContext } from "../contexts/cartContext";
 
 const Filters = () => {
-  const {
-    category,
-    setCategory,
-    setPriceRange,
-  applyFilters,
-    setProductList,
-    setSortOrder,
-    sortOrder,
-    productList,
-  } = useContext(CartContext);
+  const { setProductList, allProducts, productList } = useContext(CartContext);
 
+  const [sortOrder, setSortOrder] = useState("none");
 
+  const [priceRange, setPriceRange] = useState(["all"]);
+  const [category, setCategory] = useState("all");
 
-  function sortArrayByKey(array, key) {
-    const comparator = (a, b) => {
-      const valueA = a[key];
-      const valueB = b[key];
-      if (sortOrder === "lowToHigh") {
-        return valueA - valueB;
-      } else if (sortOrder === "highToLow") {
-        return valueB - valueA;
-      }
-    };
+  const applyFilters = () => {
+    const isInCategory = allProducts.filter((item) => {
+      return item.category === category;
+    });
+    const isInPriceRange = allProducts.filter((item) => {
+      return item.price >= priceRange[0] && item.price <= priceRange[1];
+    });
+    const commonProducts = isInCategory.filter((item) => {
+      return isInPriceRange.includes(item);
+    });
+    const filteredProducts =
+      isInCategory.length && isInPriceRange.length
+        ? commonProducts
+        : isInCategory.length
+        ? isInCategory
+        : isInPriceRange.length
+        ? isInPriceRange
+        : allProducts;
 
-    const sortedArray = array.toSorted(comparator);
-    sortOrder === "none" ? setProductList(array) : setProductList(sortedArray);
+    filteredProducts.sort(comparator);
+    return setProductList([...filteredProducts]); //using spread operator to create new reference to be able to update it
+  };
+  const comparator = (a, b) => {
+    const valueA = a.price;
+    const valueB = b.price;
+    if (sortOrder === "lowToHigh") {
+      return valueA - valueB;
+    } else if (sortOrder === "highToLow") {
+      return valueB - valueA;
+    }
+  };
 
-    return array;
-  }
+  // function sortArrayByKey(array, key) {
+
+  //   const sortedArray = array.toSorted(comparator);
+  //   sortOrder === "none" ? setProductList(array) : setProductList(sortedArray);
+
+  //   return array;
+  // }
 
   const selectCategory = (e) => {
     const selectedOption = e.target.value;

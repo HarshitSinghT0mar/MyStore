@@ -5,9 +5,21 @@ import Filters from "./Filters";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const Home = () => {
-  const { addCart, productList, fetchData, loading,location } =
+  const { productList, loading ,cart,setCart} =
     useContext(CartContext);
 
+    const addCart = (id) => {
+      const itemExists = cart.some((item) => item.id === id);
+      if (itemExists) {
+        return;
+      }
+  
+      setCart((prevItems) => {
+        const newItem = productList.find((item) => item.id === id);
+          return [...prevItems, newItem];
+        
+      });
+    };
 
   return (
     <div className="home-container">

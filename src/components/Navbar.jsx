@@ -4,8 +4,9 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { CartContext } from "../contexts/cartContext";
 
 const Navbar = () => {
-  const { counter, setCounter, cart } = useContext(CartContext);
-
+  const { cart } = useContext(CartContext);
+  const [counter, setCounter] = useState();
+  
   useEffect(() => {
     return setCounter(cart.length);
   }, [cart]);

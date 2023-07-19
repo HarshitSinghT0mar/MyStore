@@ -46,7 +46,7 @@ const Cart = () => {
         ))
       ) : (
         <div className="empty-cart-img">
-          <img src="/emptyCart.png" alt="empty cart" />
+          <img src="images/emptyCart.png" alt="empty cart" />
           <h5 style={{fontFamily:"cursive",marginLeft:"1rem"}}>cart empty</h5>
         </div>
       )}
