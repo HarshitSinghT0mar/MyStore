@@ -41,14 +41,6 @@ const Filters = () => {
     }
   };
 
-  // function sortArrayByKey(array, key) {
-
-  //   const sortedArray = array.toSorted(comparator);
-  //   sortOrder === "none" ? setProductList(array) : setProductList(sortedArray);
-
-  //   return array;
-  // }
-
   const selectCategory = (e) => {
     const selectedOption = e.target.value;
 
