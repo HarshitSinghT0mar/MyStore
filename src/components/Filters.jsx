@@ -32,6 +32,10 @@ const Filters = () => {
     return setProductList([...filteredProducts]); //using spread operator to create new reference to be able to update it
   };
   const comparator = (a, b) => {
+    if (sortOrder === "none") {
+      // Return 0 to maintain the original order
+      return 0;
+    }
     const valueA = a.price;
     const valueB = b.price;
     if (sortOrder === "lowToHigh") {

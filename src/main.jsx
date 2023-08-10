@@ -4,10 +4,14 @@ import App from "./App.jsx";
 import "bootstrap/dist/css/bootstrap.css";
 import { HashRouter } from "react-router-dom";
 
+import { CartProvider } from "./contexts/cartContext.jsx";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+  <CartProvider>
    <HashRouter>
     <App />
     </HashRouter>
+    </CartProvider>
   </React.StrictMode>
 );

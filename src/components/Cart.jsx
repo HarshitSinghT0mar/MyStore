@@ -2,9 +2,11 @@ import React, { useContext, useEffect } from "react";
 import Card from "./Card";
 import { CartContext } from "../contexts/cartContext";
 import { v4 as uuidv4 } from "uuid";
+import { useLocation } from "react-router-dom";
 
 const Cart = () => {
-  const { cart, setCart, location } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
+  const location=useLocation()
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);

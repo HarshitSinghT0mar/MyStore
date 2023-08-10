@@ -16,6 +16,7 @@
     "@mui/material": "^5.13.7",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.0",
+    "firebase": "^10.1.0",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "match-sorter": "^6.3.1",
