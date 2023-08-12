@@ -6,7 +6,7 @@ import { CartContext } from "../contexts/cartContext";
 const Navbar = () => {
   const { cart } = useContext(CartContext);
   const [counter, setCounter] = useState();
-  
+
   useEffect(() => {
     return setCounter(cart.length);
   }, [cart]);
@@ -14,11 +14,11 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className="navbar navbar-expand fixed-top"
+        className="navbar navbar-expand sticky-top"
         style={{ background: "#337ab7" }}
       >
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/LandingPage">
             MyStore
           </Link>
           <button

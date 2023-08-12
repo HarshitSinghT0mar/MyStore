@@ -6,7 +6,8 @@ import { useLocation } from "react-router-dom";
 
 const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
-  const location=useLocation()
+  const location = useLocation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
@@ -14,8 +15,8 @@ const Cart = () => {
   const onRemove = (id) => {
     setCart((prevCart) => {
       const updatedCart = prevCart.filter((item) => item.id !== id);
-      localStorage.setItem("CartStorage",JSON.stringify(updatedCart))
-      
+      localStorage.setItem("CartStorage", JSON.stringify(updatedCart));
+
       return updatedCart;
     });
   };
@@ -49,10 +50,16 @@ const Cart = () => {
       ) : (
         <div className="empty-cart-img">
           <img src="images/emptyCart.png" alt="empty cart" />
-          <h5 style={{fontFamily:"cursive",marginLeft:"1rem"}}>cart empty</h5>
+          <h5 style={{ fontFamily: "cursive", marginLeft: "1rem" }}>
+            cart empty
+          </h5>
         </div>
       )}
-      {cart.length > 0 && <button className="clear-cart-btn"onClick={clearCart}>clear cart</button>}
+      {cart.length > 0 && (
+        <button className="clear-cart-btn" onClick={clearCart}>
+          clear cart
+        </button>
+      )}
     </div>
   );
 };

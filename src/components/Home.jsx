@@ -1,28 +1,27 @@
-import React, { useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import Card from "./Card";
 import { CartContext } from "../contexts/cartContext";
 import Filters from "./Filters";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const Home = () => {
-  const { productList, loading ,cart,setCart} =
-    useContext(CartContext);
+  const { productList, loading, cart, setCart } = useContext(CartContext);
 
-    useEffect(() => {
-      cart.length && localStorage.setItem("CartStorage", JSON.stringify(cart));
-    }, [cart]);
-    const addCart = (id) => {
-      const itemExists = cart.some((item) => item.id === id);
-      if (itemExists) {
-        return;
-      }
-  
-      setCart((prevItems) => {
-        const newItem = productList.find((item) => item.id === id);
-          return [...prevItems, newItem];
-        
-      });
-    };
+  useEffect(() => {
+    cart.length && localStorage.setItem("CartStorage", JSON.stringify(cart));
+  }, [cart]);
+
+  const addCart = (id) => {
+    const itemExists = cart.some((item) => item.id === id);
+    if (itemExists) {
+      return;
+    }
+
+    setCart((prevItems) => {
+      const newItem = productList.find((item) => item.id === id);
+      return [...prevItems, newItem];
+    });
+  };
 
   return (
     <div className="home-container">

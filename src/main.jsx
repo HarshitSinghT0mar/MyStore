@@ -8,10 +8,10 @@ import { CartProvider } from "./contexts/cartContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-  <CartProvider>
-   <HashRouter>
-    <App />
-    </HashRouter>
+    <CartProvider>
+      <HashRouter>
+        <App />
+      </HashRouter>
     </CartProvider>
   </React.StrictMode>
 );
