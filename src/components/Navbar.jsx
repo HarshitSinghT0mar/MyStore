@@ -1,11 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { CartContext } from "../contexts/cartContext";
+import { signOut } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Navbar = () => {
   const { cart } = useContext(CartContext);
   const [counter, setCounter] = useState();
+  const navigate=useNavigate()
+
+  const handleLogOut=async (e)=>{
+    e.preventDefault();
+
+    await signOut(auth);
+    navigate("/Login")
+
+
+
+  }
 
   useEffect(() => {
     return setCounter(cart.length);
@@ -50,6 +63,7 @@ const Navbar = () => {
                 <span className="badge bg-danger">{counter}</span>
               )}
             </Link>
+            <button onClick={handleLogOut}>Logout</button>
             {/* <form className="d-flex" role="search">
               <input
                 className="form-control me-2"

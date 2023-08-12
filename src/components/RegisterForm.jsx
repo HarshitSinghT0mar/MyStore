@@ -6,8 +6,8 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { Link, redirect } from "react-router-dom";
-import { red } from "@mui/material/colors";
+import { Link, useNavigate } from "react-router-dom";
+
 // import { onAuthStateChanged } from "firebase/auth";
 
 
@@ -15,7 +15,7 @@ const RegisterForm = ({isNotRegistered}) => {
   const initialState = { email: "", password: "", confirmPwd: "" };
   const [user, setUser] = useState(initialState);
 
- 
+ const navigate =useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,7 +26,7 @@ const RegisterForm = ({isNotRegistered}) => {
          e.preventDefault();
     try {
         await signInWithPopup(auth,provider)
-        redirect("/Home")
+        navigate("/Home")
         
     } catch (err) {
         console.error(err);
@@ -37,7 +37,7 @@ const RegisterForm = ({isNotRegistered}) => {
     e.preventDefault();
     try {
       user.confirmPwd === user.password && await createUserWithEmailAndPassword(auth, user.email, user.password);
-        redirect("/Home");
+        navigate("/Home");
     } catch (err) {
       console.log(err);
     }
@@ -49,7 +49,7 @@ const RegisterForm = ({isNotRegistered}) => {
       try {
        await signInWithEmailAndPassword(auth,user.email,user.password)
        .then((res)=>(console.log(res)))
-       redirect("/Home")
+       navigate("/Home")
     
    } catch (error) {
     console.log("error")
