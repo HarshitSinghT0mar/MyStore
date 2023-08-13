@@ -2,23 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { CartContext } from "../contexts/cartContext";
-import { signOut } from "firebase/auth";
-import { auth } from "../utils/firebase";
+
+// import { Dashboard } from "@mui/icons-material";
+import PositionedMenu from "./PositionedMenu";
 
 const Navbar = () => {
   const { cart } = useContext(CartContext);
   const [counter, setCounter] = useState();
-  const navigate=useNavigate()
-
-  const handleLogOut=async (e)=>{
-    e.preventDefault();
-
-    await signOut(auth);
-    navigate("/Login")
-
-
-
-  }
 
   useEffect(() => {
     return setCounter(cart.length);
@@ -28,7 +18,7 @@ const Navbar = () => {
     <>
       <nav
         className="navbar navbar-expand sticky-top"
-        style={{ background: "#337ab7" }}
+        style={{ background: "#337ab7",height:"4rem" }}
       >
         <div className="container-fluid">
           <Link className="navbar-brand" to="/LandingPage">
@@ -63,18 +53,10 @@ const Navbar = () => {
                 <span className="badge bg-danger">{counter}</span>
               )}
             </Link>
-            <button onClick={handleLogOut}>Logout</button>
-            {/* <form className="d-flex" role="search">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-light" type="submit">
-                Search
-              </button>
-            </form> */}
+            <div>
+              <PositionedMenu />
+            </div>
+          
           </div>
         </div>
       </nav>

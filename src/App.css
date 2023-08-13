@@ -26,7 +26,7 @@ body {
   flex-direction: column;
   justify-content: flex-start; /* Align content to the top */
   align-items: center; /* Center content horizontally */
-  margin-top: 40px;
+  /* margin-top: 40px; */
   /* padding: 40px; */
 }
 
@@ -69,12 +69,14 @@ body {
   justify-content: space-between;
   margin-bottom: 10px;
   gap: 20px;
+
 }
 
 .filter-category,
 .filter-price,
 .sort-products {
   flex: 1;
+
 }
 
 label {
@@ -87,6 +89,7 @@ select {
   padding: 5px;
   border-radius: 3px;
   border: 1px solid #ccc;
+  cursor: pointer;
 }
 
 .filter-button {

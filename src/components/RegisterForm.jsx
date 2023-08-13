@@ -4,77 +4,78 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signOut,
 } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
-// import { onAuthStateChanged } from "firebase/auth";
-
-
-const RegisterForm = ({isNotRegistered}) => {
-  const initialState = { email: "", password: "", confirmPwd: "" };
-  const [user, setUser] = useState(initialState);
-
- const navigate =useNavigate();
+const RegisterForm = ({ isNotRegistered }) => {
+  const navigate = useNavigate();
+  const { user, setUser, initialState } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     return setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
-  const signupWithGoogle=async (e)=>{
-         e.preventDefault();
+  const signupWithGoogle = async (e) => {
+    e.preventDefault();
     try {
-        await signInWithPopup(auth,provider)
-        navigate("/Home")
-        
+      await signInWithPopup(auth, provider);
+      navigate("/Home");
     } catch (err) {
-        console.error(err);
+      console.error(err);
     }
-    
-  }
+  };
   const signUp = async (e) => {
     e.preventDefault();
     try {
-      user.confirmPwd === user.password && await createUserWithEmailAndPassword(auth, user.email, user.password);
-        navigate("/Home");
+      user?.confirmPwd === user?.password &&
+        (await createUserWithEmailAndPassword(
+          auth,
+          user?.email,
+          user?.password
+        ));
+      navigate("/Home");
     } catch (err) {
       console.log(err);
     }
     return setUser(initialState);
   };
 
-  const signIn=async (e)=>{
+  const signIn = async (e) => {
     e.preventDefault();
-      try {
-       await signInWithEmailAndPassword(auth,user.email,user.password)
-       .then((res)=>(console.log(res)))
-       navigate("/Home")
-    
-   } catch (error) {
-    console.log("error")
-   }
-  }
+    try {
+      await signInWithEmailAndPassword(auth, user.email, user.password);
 
-//   const logOut=async (e)=>{
-// try {
-//     signOut(auth)
-// } catch (error) {
-//     console.log(error);
-// }
-//   }
+      navigate("/Home");
+    } catch (error) {
+      console.log(error);
+    }
+    setUser(initialState);
+  };
 
   return (
     <div className="form-container">
       <form className="form-card">
-      <button onClick={signupWithGoogle} className="google-btn">
+        <button onClick={signupWithGoogle} className="google-btn">
           <img src="./images/googleIcon.svg" className="google-icon" />
           <span>Continue with Google</span>
         </button>
-        <p style={{ textAlign: "center",margin:'0' }}>or</p>
-        <Link to="/Home"><span style={{display:"block",margin:"0",textAlign:'center',fontSize:"14px"}}>continue without signup</span></Link>
-        <h1>Sign {isNotRegistered?"up":"in"}</h1>
-       
+        <p style={{ textAlign: "center", margin: "0" }}>or</p>
+        <Link to="/Home">
+          <span
+            style={{
+              display: "block",
+              margin: "0",
+              textAlign: "center",
+              fontSize: "14px",
+            }}
+          >
+            continue without signup
+          </span>
+        </Link>
+        <h1>Sign {isNotRegistered ? "up" : "in"}</h1>
+
         <label>Email</label>
         <input
           onChange={handleInputChange}
@@ -91,8 +92,8 @@ const RegisterForm = ({isNotRegistered}) => {
           onChange={handleInputChange}
           value={user.password}
         />
-       
-       {isNotRegistered && (
+
+        {isNotRegistered && (
           <>
             <label>Confirm Password</label>
             <input
@@ -104,17 +105,26 @@ const RegisterForm = ({isNotRegistered}) => {
             />
           </>
         )}
-        
-        <button className="form-btn" onClick={isNotRegistered?signUp:signIn}>
-          {isNotRegistered?"Sign up":"Login"}
+
+        <button
+          className="form-btn"
+          onClick={isNotRegistered ? signUp : signIn}
+        >
+          {isNotRegistered ? "Sign up" : "Login"}
         </button>
         {/* <button className="form-btn" onClick={logOut}>
           Log Out
         </button> */}
-     
-      <div style={{fontSize:"14px",textAlign:"center",marginTop:"6px"}}>{isNotRegistered&& "Already a user? "}<Link to={isNotRegistered?"/Login":"/RegisterForm"}>{isNotRegistered?"Login":"Register User"}</Link></div>
-      </form>
 
+        <div
+          style={{ fontSize: "14px", textAlign: "center", marginTop: "6px" }}
+        >
+          {isNotRegistered ? "Already a user?" : "Not registered? "}
+          <Link to={isNotRegistered ? "/Login" : "/RegisterForm"}>
+            {isNotRegistered ? "Login" : "register here"}
+          </Link>
+        </div>
+      </form>
     </div>
   );
 };

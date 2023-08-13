@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 
+
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
@@ -7,6 +8,8 @@ export function CartProvider({ children }) {
   const [allProducts, setAllProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  
 
   const fetchData = async () => {
     try {
