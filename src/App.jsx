@@ -1,5 +1,4 @@
 import "./App.css";
-import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import { useEffect, useContext } from "react";
@@ -7,7 +6,7 @@ import Cart from "./components/Cart";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { CartContext } from "./contexts/cartContext";
 import RegisterForm from "./components/RegisterForm";
-import LandingPage from "./components/LandingPage";
+// import LandingPage from "./components/LandingPage";
 
 import Login from "./components/Login";
 import { auth } from "./utils/firebase";
@@ -45,7 +44,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route index element={<RegisterForm isNotRegistered={true} />} />
-        <Route path="/LandingPage" element={<LandingPage />} />
+        {/* <Route path="/LandingPage" element={<LandingPage />} /> */}
         <Route path="/Login" element={<Login />} />
         <Route
           path="/RegisterForm"
@@ -55,7 +54,7 @@ function App() {
         <Route path="Home" element={<Home />} />
       </Routes>
 
-      <Footer />
+      
     </div>
   );
 }

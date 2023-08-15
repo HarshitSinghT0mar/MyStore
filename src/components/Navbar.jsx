@@ -21,7 +21,7 @@ const Navbar = () => {
         style={{ background: "#337ab7",height:"4rem" }}
       >
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/LandingPage">
+          <Link className="navbar-brand" to="#">
             MyStore
           </Link>
           <button
