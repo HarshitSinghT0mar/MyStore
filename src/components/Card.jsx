@@ -27,7 +27,7 @@ const Card = (props) => {
         </li>
       </ul>
       <div className="card-footer">
-        <Button btnFunction={props.onclick} btn={props.text} />
+        <Button btnFunction={props.onclick} btn={props.text} bool={props.bool} />
       </div>
     </div>
   );

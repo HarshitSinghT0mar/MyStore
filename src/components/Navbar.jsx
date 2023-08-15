@@ -3,10 +3,11 @@ import { Link, Outlet } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { CartContext } from "../contexts/cartContext";
 
+
 const Navbar = () => {
   const { cart } = useContext(CartContext);
   const [counter, setCounter] = useState();
-  
+
   useEffect(() => {
     return setCounter(cart.length);
   }, [cart]);
@@ -14,8 +15,8 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className="navbar navbar-expand fixed-top"
-        style={{ background: "#337ab7" }}
+        className="navbar navbar-expand sticky-top"
+        style={{ background: "#2196F3 ",height: '4rem' }}
       >
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
@@ -64,7 +65,10 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
+
     </>
   );
 };

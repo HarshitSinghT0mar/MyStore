@@ -6,6 +6,7 @@ import { useEffect, useContext } from "react";
 import Cart from "./components/Cart";
 import { Route, Routes } from "react-router-dom";
 import { CartContext } from "./contexts/cartContext";
+import LandingPage from "./components/LandingPage";
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
      
         <Navbar />
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<LandingPage />} />
           <Route path="Cart" element={<Cart />} />
           <Route path="Home" element={<Home />} />
         </Routes>
