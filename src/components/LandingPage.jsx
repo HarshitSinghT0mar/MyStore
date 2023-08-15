@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from 'react-router-dom';
 
 
@@ -16,7 +15,7 @@ const LandingPage = () => {
       </div>
       <section className="section-image-carousel">
      
-        <Carousel interval={2000} autoPlay={true} infiniteLoop={true} stopOnHover={false} showThumbs={false}>
+        <Carousel interval={3000} autoPlay={true} infiniteLoop={true} stopOnHover={false} showThumbs={false}>
           <div>
             <img loading="lazy" src="./images/sale.jpg" alt="Product 1" />
  
