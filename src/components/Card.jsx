@@ -5,7 +5,10 @@ import Rating from "@mui/material/Rating";
 const Card = (props) => {
   return (
     <div className="card">
-      <img className="card-image" src={props.image} alt="Product Image" />
+      <div className="card-image-container">
+        <img className="card-image" src={props.image} alt="Product Image" />
+      </div>
+    
       <div className="card-body">
         <h5 className="card-title">{props.title}</h5>
         {props.bool ? (
@@ -27,8 +30,13 @@ const Card = (props) => {
         </li>
       </ul>
       <div className="card-footer">
-        <Button btnFunction={props.onclick} btn={props.text} bool={props.bool} />
+        <Button
+          btnFunction={props.onclick}
+          btn={props.text}
+          bool={props.bool}
+        />
       </div>
+      
     </div>
   );
 };
