@@ -13,7 +13,7 @@ const LandingPage = () => {
       
 <section className="section-image-carousel">
      
-     <Carousel interval={3000} autoPlay={true} infiniteLoop={true} stopOnHover={false} showThumbs={false}>
+     <Carousel interval={3000} autoPlay={true} infiniteLoop={true} stopOnHover={false} showThumbs={false} className='carousel-images'>
        <div>
          <img loading="lazy" src="./images/sale.jpg" alt="Product 1" />
      

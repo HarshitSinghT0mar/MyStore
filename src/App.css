@@ -340,6 +340,12 @@ select {
 
 }
 
+
+.carousel-images img{
+  max-height: 28rem;
+  object-fit: cover;
+}
+
 .container h1 {
   font-size: 36px;
   margin: 0;
