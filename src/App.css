@@ -16,7 +16,7 @@ body {
   --red-color-dark: #f53920f8;
   --optional-color: rgb(255, 127, 8);
   --optional-color-dark: rgb(255, 94, 0);
-  --light-grey: #f5f5f5d8;
+  --light-grey: #f5f5f538;
 }
 
 .home-container {
@@ -354,7 +354,7 @@ select {
 .image-section {
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: center;  
 }
 
 .image-box {
