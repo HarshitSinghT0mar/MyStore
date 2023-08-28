@@ -18,10 +18,10 @@ const Navbar = () => {
     <>
       <nav
         className="navbar navbar-expand sticky-top"
-        style={{ background: "#337ab7",height:"4rem" }}
+        style={{ background: "#2196F3 ",height: '4rem' }}
       >
         <div className="container-fluid">
-          <Link className="navbar-brand" to="#">
+          <Link className="navbar-brand nav-item" to="/">
             MyStore
           </Link>
           <button
@@ -60,7 +60,10 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
+
     </>
   );
 };
