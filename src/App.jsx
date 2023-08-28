@@ -2,41 +2,34 @@ import "./App.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-import { useEffect, useContext } from "react";
+import { useContext, useMemo } from "react";
 import Cart from "./components/Cart";
 import { Route, Routes } from "react-router-dom";
 import { CartContext } from "./contexts/cartContext";
 import LandingPage from "./components/LandingPage";
 
-
 function App() {
+  const { setCart, fetchData } = useContext(CartContext);
 
-  const{setCart,fetchData}=useContext(CartContext)
+  useMemo(() => fetchData(), []);
   
+    window.onload = () => {
+      console.log("onload");
+      const storedItems = JSON.parse(localStorage.getItem("CartStorage"));
+      storedItems && setCart(storedItems);
+    };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-
-
-  window.onload = () => {
-    const storedItems = JSON.parse(localStorage.getItem("CartStorage"));
-    storedItems && setCart(storedItems);
-  };
 
   return (
     <>
-     
-        <Navbar />
-        <Routes>
-          <Route index element={<LandingPage />} />
-          <Route path="Cart" element={<Cart />} />
-          <Route path="Home" element={<Home />} />
-        </Routes>
+      <Navbar />
+      <Routes>
+        <Route index element={<LandingPage />} />
+        <Route path="Cart" element={<Cart />} />
+        <Route path="Home" element={<Home />} />
+      </Routes>
 
-        <Footer />
-     
+      <Footer />
     </>
   );
 }
