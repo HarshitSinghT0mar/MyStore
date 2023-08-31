@@ -5,6 +5,7 @@ import { CartContext } from "../contexts/cartContext";
 
 // import { Dashboard } from "@mui/icons-material";
 import PositionedMenu from "./PositionedMenu";
+import Footer from "./Footer";
 
 const Navbar = () => {
   const { cart } = useContext(CartContext);

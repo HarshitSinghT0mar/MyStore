@@ -13,7 +13,6 @@ export default function PositionedMenu() {
 
   const open = Boolean(anchorEl);
 
- console.log(auth?.currentUser);
 
   const navigate = useNavigate();
   const handleClick = (event) => {
@@ -47,7 +46,7 @@ export default function PositionedMenu() {
         <Avatar
           alt="user"
           src={auth?.currentUser?.photoURL}
-          sx={{ width:34,height:34, backgroundColor:"#23527c;",border:"1px solid white",transition:"all 0.1s ease", '&:hover':{width:36,height:36,zIndex:2}}}
+          sx={{ width:34,height:34, backgroundColor:"#005ca8;",border:"1px solid white",transition:"all 0.1s ease", '&:hover':{width:36,height:36,zIndex:2}}}
         />
       </Button>
       <Menu

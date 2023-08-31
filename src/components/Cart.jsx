@@ -2,7 +2,8 @@ import React, { useContext, useEffect } from "react";
 import Card from "./Card";
 import { CartContext } from "../contexts/cartContext";
 import { v4 as uuidv4 } from "uuid";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { auth } from "../utils/firebase";
 
 const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
@@ -50,8 +51,8 @@ const Cart = () => {
       ) : (
         <div className="empty-cart-img">
           <img src="images/emptyCart.png" alt="empty cart" />
-          <h5 style={{ fontFamily: "cursive", marginLeft: "1rem" }}>
-            cart empty
+          <h5 style={{ marginLeft: "1rem" }}>
+           cart empty
           </h5>
         </div>
       )}

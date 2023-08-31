@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { auth, provider } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { toast } from "react-toastify";
 
 const RegisterForm = ({ isNotRegistered }) => {
   const navigate = useNavigate();
@@ -21,21 +22,24 @@ const RegisterForm = ({ isNotRegistered }) => {
     e.preventDefault();
     try {
       await signInWithPopup(auth, provider);
-      navigate("/Home");
+      navigate("/");
     } catch (err) {
-      console.error(err);
+      console.error("error has occurred: ",err);
     }
   };
   const signUp = async (e) => {
     e.preventDefault();
     try {
-      user?.confirmPwd === user?.password &&
-        (await createUserWithEmailAndPassword(
-          auth,
-          user?.email,
-          user?.password
-        ));
-      navigate("/Home");
+      if (user?.confirmPwd === user?.password) {
+        await createUserWithEmailAndPassword(auth, user?.email, user?.password);
+        navigate("/");
+        toast.success("signed up successfully", {
+          progressStyle: {
+            backgroundColor: "white",
+          },
+        });
+      } else {
+        toast.error("passwords did not match..")}
     } catch (err) {
       console.log(err);
     }
@@ -47,8 +51,14 @@ const RegisterForm = ({ isNotRegistered }) => {
     try {
       await signInWithEmailAndPassword(auth, user.email, user.password);
 
-      navigate("/Home");
+      navigate("/");
+      toast.success("logged in successfully", {
+        progressStyle: {
+          backgroundColor: "white",
+        },
+      });
     } catch (error) {
+      toast.error("incorrect username or password")
       console.log(error);
     }
     setUser(initialState);
@@ -56,13 +66,13 @@ const RegisterForm = ({ isNotRegistered }) => {
 
   return (
     <div className="form-container">
-      <form className="form-card">
+      <form className="form-card" onSubmit={isNotRegistered ? signUp : signIn}>
         <button onClick={signupWithGoogle} className="google-btn">
           <img src="./images/googleIcon.svg" className="google-icon" />
           <span>Continue with Google</span>
         </button>
         <p style={{ textAlign: "center", margin: "0" }}>or</p>
-        <Link to="/Home">
+        <Link to="/">
           <span
             style={{
               display: "block",
@@ -83,6 +93,7 @@ const RegisterForm = ({ isNotRegistered }) => {
           type="email"
           placeholder="Email..."
           value={user.email}
+          required
         />
         <label>Password</label>
         <input
@@ -91,6 +102,7 @@ const RegisterForm = ({ isNotRegistered }) => {
           placeholder="Password..."
           onChange={handleInputChange}
           value={user.password}
+          required
         />
 
         {isNotRegistered && (
@@ -102,19 +114,14 @@ const RegisterForm = ({ isNotRegistered }) => {
               placeholder="Confirm Password..."
               onChange={handleInputChange}
               value={user.confirmPwd}
+              required
             />
           </>
         )}
 
-        <button
-          className="form-btn"
-          onClick={isNotRegistered ? signUp : signIn}
-        >
+        <button className="form-btn">
           {isNotRegistered ? "Sign up" : "Login"}
         </button>
-        {/* <button className="form-btn" onClick={logOut}>
-          Log Out
-        </button> */}
 
         <div
           style={{ fontSize: "14px", textAlign: "center", marginTop: "6px" }}

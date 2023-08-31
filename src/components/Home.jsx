@@ -3,6 +3,7 @@ import Card from "./Card";
 import { CartContext } from "../contexts/cartContext";
 import Filters from "./Filters";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useLocation } from "react-router";
 
 const Home = () => {
   const { productList, loading, cart, setCart } = useContext(CartContext);
@@ -10,6 +11,13 @@ const Home = () => {
   useEffect(() => {
     cart.length && localStorage.setItem("CartStorage", JSON.stringify(cart));
   }, [cart]);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
 
   const addCart = (id) => {
     const itemExists = cart.some((item) => item.id === id);
