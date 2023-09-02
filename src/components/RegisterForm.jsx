@@ -21,7 +21,7 @@ const RegisterForm = ({ isNotRegistered }) => {
   const signupWithGoogle = async (e) => {
     e.preventDefault();
     try {
-      await signInWithPopup(auth, provider);
+      await auth.signInWithPopup(provider);
       navigate("/");
     } catch (err) {
       console.error("error has occurred: ",err);
