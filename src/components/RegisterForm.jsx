@@ -3,7 +3,7 @@ import { auth, provider } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signInWithPopup,
+  signInWithPopup
 } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -21,7 +21,7 @@ const RegisterForm = ({ isNotRegistered }) => {
   const signupWithGoogle = async (e) => {
     e.preventDefault();
     try {
-      await auth.signInWithPopup(provider);
+      await signInWithPopup(auth,provider);
       navigate("/");
     } catch (err) {
       console.error("error has occurred: ",err);

@@ -341,7 +341,7 @@ select {
 }
 
 .carousel-image img {
-  /* height: 16rem; */
+  height: 12rem;
   object-fit: cover;
   max-width: 100%;
 
