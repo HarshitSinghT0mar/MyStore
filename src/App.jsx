@@ -15,12 +15,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const { setCart, fetchData } = useContext(CartContext);
+  const { setCart} = useContext(CartContext);
 
-  useMemo(() => {
-    fetchData();
-  }, []);
-  // const navigate = useNavigate();
+  
+
 
   window.onload = () => {
     const storedItems = JSON.parse(localStorage.getItem("CartStorage"));
@@ -40,27 +38,11 @@ function App() {
     };
   }, []);
 
-  return (
-    <>
-      <Navbar />
-      <ToastContainer
-        autoClose={3000}
-       theme="colored"
-      />
-      <Routes>
-        {/* <Route index element={<RegisterForm isNotRegistered={true} />} /> */}
-        <Route index element={<LandingPage />} />
-        <Route path="Cart" element={<Cart />} />
-        <Route path="Home" element={<Home />} />
-        <Route path="Login" element={<Login />} />
-        <Route
-          path="/RegisterForm"
-          element={<RegisterForm isNotRegistered={true} />}
-        />
-      </Routes>
-      <Footer />
-    </>
-  );
+  // return (
+  //   <>
+      
+  //   </>
+  // );
 }
 
 export default App;

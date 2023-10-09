@@ -6,7 +6,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useLocation } from "react-router";
 
 const Home = () => {
-  const { productList, loading, cart, setCart } = useContext(CartContext);
+  const { productList, loading, cart, setCart,fetchData } = useContext(CartContext);
+
+  useMemo(() => {
+    fetchData();
+  }, []);
 
   useEffect(() => {
     cart.length && localStorage.setItem("CartStorage", JSON.stringify(cart));
@@ -30,6 +34,7 @@ const Home = () => {
       return [...prevItems, newItem];
     });
   };
+  
 
   return (
     <div className="home-container">
